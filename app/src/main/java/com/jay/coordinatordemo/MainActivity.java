@@ -2,6 +2,7 @@ package com.jay.coordinatordemo;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
@@ -36,6 +37,12 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, TabActivity.class));
+            }
+        });
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setAdapter(new MyRecyclerAdapter(this));
@@ -48,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        //去除菜单按钮
+        menu.findItem(R.id.action_settings).setVisible(false);
+        invalidateOptionsMenu();
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
