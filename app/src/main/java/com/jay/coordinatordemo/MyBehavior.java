@@ -4,12 +4,14 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.FrameLayout;
 
 /**
  * Created by Jay on 2016/12/20.
@@ -17,10 +19,11 @@ import android.view.animation.DecelerateInterpolator;
  */
 
 public class MyBehavior extends  CoordinatorLayout.Behavior<FloatingActionButton> {
-    private ObjectAnimator mAnimator;
     private boolean isHided = false;
-
     private float animatorWidth;
+
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+
 
     public MyBehavior() {
     }
@@ -41,6 +44,23 @@ public class MyBehavior extends  CoordinatorLayout.Behavior<FloatingActionButton
 
     @Override
     public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionButton child, View directTargetChild, View target, int nestedScrollAxes) {
+        if(mSwipeRefreshLayout == null && target instanceof  SwipeRefreshLayout) {
+            mSwipeRefreshLayout = (SwipeRefreshLayout) target;
+            mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    //TODO
+                    mSwipeRefreshLayout.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mSwipeRefreshLayout.setRefreshing(false);
+                        }
+                    }, 2000);
+                }
+            });
+            mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        }
+
         //true if the Behavior wishes to accept this nested scroll
         return true;
     }
@@ -49,6 +69,7 @@ public class MyBehavior extends  CoordinatorLayout.Behavior<FloatingActionButton
     public void onNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionButton child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
         super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
 
+        ObjectAnimator mAnimator;
         if(dyConsumed > 0) {
             //up disappear
             if(!isHided) {

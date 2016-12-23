@@ -13,5 +13,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_tab">TabActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="android_fans">Android Fans</string>
+    <string name="android_fans">After ZhiHu</string>
+    <string name="search_tips">搜索话题、问题或人</string>
 </resources>
