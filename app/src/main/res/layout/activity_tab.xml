@@ -41,13 +41,45 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <android.support.design.widget.FloatingActionButton
-        app:layout_behavior=".MyBehavior"
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.jay.coordinatordemo.MaskFrameLayout
+        android:visibility="gone"
+        android:background="#00FFFFFF"
+        android:id="@+id/mask_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <Button
+        android:text="asdasdasds"
         android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="200dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+
+    <com.jay.coordinatordemo.widgets.FloatingActionMenu
+        android:id="@+id/my_floating_menu"
+        app:bottomDrawable="@mipmap/ic_fab_write"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_answer" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_question" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_share" />
+
+    </com.jay.coordinatordemo.widgets.FloatingActionMenu>
 
 </android.support.design.widget.CoordinatorLayout>

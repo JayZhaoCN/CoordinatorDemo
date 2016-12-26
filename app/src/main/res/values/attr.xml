@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--暂时就这四个-->
+    <declare-styleable name="FloatingActionMenu">
+        <attr name="marginTop" format="dimension" />
+        <attr name="marginBottom" format="dimension" />
+        <attr name="marginLeft" format="dimension" />
+        <attr name="marginRight" format="dimension" />
+        <attr name="animationDuration" format="integer" />
+        <attr name="bottomDrawable" format="reference" />
+        <attr name="animationType">
+            <enum name="translate" value="0" />
+            <enum name="scale" value="1" />
+            <enum name="alpha" value="2" />
+        </attr>
+    </declare-styleable>
+
+</resources>

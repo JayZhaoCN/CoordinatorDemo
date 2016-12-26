@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.widget.FrameLayout;
 
 /**
@@ -47,7 +46,7 @@ public class MaskFrameLayout extends FrameLayout {
 
             if (mMaskAnimator == null) {
                 mMaskAnimator = ValueAnimator.ofInt(0, (int) Math.sqrt(getWidth() * getWidth() + getHeight() * getHeight()));
-                mMaskAnimator.setDuration(400);
+                mMaskAnimator.setDuration(270);
                 mMaskAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(ValueAnimator animation) {

@@ -9,7 +9,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
-import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 /**
  * Created by Jay on 2016/12/20.

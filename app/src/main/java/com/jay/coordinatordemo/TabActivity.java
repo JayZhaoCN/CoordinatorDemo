@@ -1,10 +1,7 @@
 package com.jay.coordinatordemo;
 
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -20,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+
+import com.jay.coordinatordemo.widgets.FloatingActionMenu;
 
 public class TabActivity extends AppCompatActivity {
 
@@ -67,11 +66,37 @@ public class TabActivity extends AppCompatActivity {
             if(tab != null) tab.setCustomView(adapter.getTabView(i));
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        final FloatingActionMenu floatingActionMenu = (FloatingActionMenu) findViewById(R.id.my_floating_menu);
+        floatingActionMenu.setOnItemClickListener(new FloatingActionMenu.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                startActivity(new Intent(TabActivity.this, NavigationActivity.class));
+                //关闭（不带动画）
+                floatingActionMenu.collapse();
+            }
+        });
+
+        final MaskFrameLayout maskLayout = (MaskFrameLayout) findViewById(R.id.mask_layout);
+        maskLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TabActivity.this, NavigationActivity.class));
+                //关闭（带动画）
+                floatingActionMenu.collapseWithAnimation();
+            }
+        });
+
+        floatingActionMenu.setOnCollpaseListener(new FloatingActionMenu.OnCollapseListener() {
+            @Override
+            public void onCollapsing() {
+                maskLayout.hideMask();
+            }
+
+            @Override
+            public void onExpanding() {
+                if(!maskLayout.isStarted()) {
+                    maskLayout.setVisibility(View.VISIBLE);
+                    maskLayout.initAnim();
+                }
             }
         });
     }

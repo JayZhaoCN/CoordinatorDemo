@@ -124,6 +124,7 @@
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
     <LinearLayout
+        android:elevation="5dp"
         android:background="#FFFFFF"
         app:layout_behavior=".BottomSheetBehavior"
         android:orientation="horizontal"
