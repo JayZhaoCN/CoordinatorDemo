@@ -16,7 +16,7 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
  * my behavior
  */
 
-public class MyBehavior extends  CoordinatorLayout.Behavior<FloatingActionsMenu> {
+public class MyBehavior extends  CoordinatorLayout.Behavior<View> {
     private boolean isHided = false;
     private float animatorWidth;
 
@@ -31,17 +31,17 @@ public class MyBehavior extends  CoordinatorLayout.Behavior<FloatingActionsMenu>
     }
 
     @Override
-    public boolean onDependentViewChanged(CoordinatorLayout parent, FloatingActionsMenu child, View dependency) {
+    public boolean onDependentViewChanged(CoordinatorLayout parent, View child, View dependency) {
         return super.onDependentViewChanged(parent, child, dependency);
     }
 
     @Override
-    public boolean layoutDependsOn(CoordinatorLayout parent, FloatingActionsMenu child, View dependency) {
+    public boolean layoutDependsOn(CoordinatorLayout parent, View child, View dependency) {
         return dependency instanceof RecyclerView;
     }
 
     @Override
-    public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionsMenu child, View directTargetChild, View target, int nestedScrollAxes) {
+    public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, View child, View directTargetChild, View target, int nestedScrollAxes) {
         if(mSwipeRefreshLayout == null && target instanceof  SwipeRefreshLayout) {
             mSwipeRefreshLayout = (SwipeRefreshLayout) target;
             mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -53,7 +53,7 @@ public class MyBehavior extends  CoordinatorLayout.Behavior<FloatingActionsMenu>
                         public void run() {
                             mSwipeRefreshLayout.setRefreshing(false);
                         }
-                    }, 2000);
+                    }, 1000);
                 }
             });
             mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
@@ -64,7 +64,7 @@ public class MyBehavior extends  CoordinatorLayout.Behavior<FloatingActionsMenu>
     }
 
     @Override
-    public void onNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionsMenu child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
+    public void onNestedScroll(CoordinatorLayout coordinatorLayout, View child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
         super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
 
         ObjectAnimator mAnimator;
@@ -73,7 +73,7 @@ public class MyBehavior extends  CoordinatorLayout.Behavior<FloatingActionsMenu>
             if(!isHided) {
                 animatorWidth = coordinatorLayout.getWidth() - child.getX();
                 mAnimator = ObjectAnimator.ofFloat(child, "translationX", 0, animatorWidth);
-                mAnimator.setDuration(500);
+                mAnimator.setDuration(800);
                 mAnimator.setInterpolator(new DecelerateInterpolator(3));
                 mAnimator.start();
                 isHided = true;
@@ -83,7 +83,7 @@ public class MyBehavior extends  CoordinatorLayout.Behavior<FloatingActionsMenu>
             if(isHided) {
                 mAnimator = ObjectAnimator.ofFloat(child, "translationX", animatorWidth, 0);
                 mAnimator.setInterpolator(new DecelerateInterpolator(3));
-                mAnimator.setDuration(500);
+                mAnimator.setDuration(800);
                 mAnimator.start();
                 isHided = false;
             }

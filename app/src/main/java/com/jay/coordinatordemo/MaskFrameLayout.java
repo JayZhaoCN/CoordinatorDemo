@@ -72,8 +72,4 @@ public class MaskFrameLayout extends FrameLayout {
         this.setVisibility(GONE);
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return true;
-    }
 }
