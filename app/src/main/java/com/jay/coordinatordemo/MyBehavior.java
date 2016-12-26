@@ -3,22 +3,20 @@ package com.jay.coordinatordemo;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.FrameLayout;
+
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 /**
  * Created by Jay on 2016/12/20.
  * my behavior
  */
 
-public class MyBehavior extends  CoordinatorLayout.Behavior<FloatingActionButton> {
+public class MyBehavior extends  CoordinatorLayout.Behavior<FloatingActionsMenu> {
     private boolean isHided = false;
     private float animatorWidth;
 
@@ -33,17 +31,17 @@ public class MyBehavior extends  CoordinatorLayout.Behavior<FloatingActionButton
     }
 
     @Override
-    public boolean onDependentViewChanged(CoordinatorLayout parent, FloatingActionButton child, View dependency) {
+    public boolean onDependentViewChanged(CoordinatorLayout parent, FloatingActionsMenu child, View dependency) {
         return super.onDependentViewChanged(parent, child, dependency);
     }
 
     @Override
-    public boolean layoutDependsOn(CoordinatorLayout parent, FloatingActionButton child, View dependency) {
+    public boolean layoutDependsOn(CoordinatorLayout parent, FloatingActionsMenu child, View dependency) {
         return dependency instanceof RecyclerView;
     }
 
     @Override
-    public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionButton child, View directTargetChild, View target, int nestedScrollAxes) {
+    public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionsMenu child, View directTargetChild, View target, int nestedScrollAxes) {
         if(mSwipeRefreshLayout == null && target instanceof  SwipeRefreshLayout) {
             mSwipeRefreshLayout = (SwipeRefreshLayout) target;
             mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -66,7 +64,7 @@ public class MyBehavior extends  CoordinatorLayout.Behavior<FloatingActionButton
     }
 
     @Override
-    public void onNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionButton child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
+    public void onNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionsMenu child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
         super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
 
         ObjectAnimator mAnimator;

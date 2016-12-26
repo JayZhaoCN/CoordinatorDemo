@@ -32,12 +32,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
 public class MainActivity extends AppCompatActivity {
     private ImageView tabImg1;
     private ImageView tabImg2;
     private ImageView tabImg3;
     private ImageView tabImg4;
     private ImageView tabImg5;
+
+    private MaskFrameLayout mMaskLayout;
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +56,36 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        mMaskLayout = (MaskFrameLayout) findViewById(R.id.mask_layout);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView.setAdapter(new MyRecyclerAdapter(this));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        FloatingActionsMenu fabMenu = (FloatingActionsMenu) findViewById(R.id.fab_menu);
+        fabMenu.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, TabActivity.class));
+            public void onMenuExpanded() {
+                if(!mMaskLayout.isStarted()) {
+                    mMaskLayout.setVisibility(View.VISIBLE);
+                    mMaskLayout.initAnim();
+
+                }
+            }
+
+            @Override
+            public void onMenuCollapsed() {
+                mMaskLayout.hideMask();
             }
         });
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setAdapter(new MyRecyclerAdapter(this));
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        com.getbase.floatingactionbutton.FloatingActionButton button1 = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.action_a);
+        com.getbase.floatingactionbutton.FloatingActionButton button2 = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.action_b);
+        com.getbase.floatingactionbutton.FloatingActionButton button3 = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.action_c);
+        button1.setIcon(R.drawable.ic_menu_gallery);
+        button2.setIcon(R.drawable.ic_menu_gallery);
+        button3.setIcon(R.drawable.ic_menu_gallery);
+
 
         tabImg1 = (ImageView) findViewById(R.id.tab_1);
         tabImg2 = (ImageView) findViewById(R.id.tab_2);
