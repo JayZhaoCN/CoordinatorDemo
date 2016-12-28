@@ -6,18 +6,14 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.jay.coordinatordemo.R;
 
@@ -181,7 +177,6 @@ public class FloatingActionMenu extends LinearLayout {
                     expand();
                 } else {
                     collapseWithAnimation();
-
                 }
             }
         });
@@ -206,7 +201,6 @@ public class FloatingActionMenu extends LinearLayout {
         }
         mIsShowing = true;
     }
-
 
     /**
      * 不带动画效果的关闭
@@ -297,5 +291,4 @@ public class FloatingActionMenu extends LinearLayout {
         void onCollapsing();
         void onExpanding();
     }
-
 }
