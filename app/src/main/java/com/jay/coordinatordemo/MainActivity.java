@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
@@ -23,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
+import com.jay.coordinatordemo.widgets.PopLayout;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView tabImg1;
@@ -49,10 +51,40 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(new MyRecyclerAdapter(this));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        final FloatingActionsMenu fabMenu = (FloatingActionsMenu) findViewById(R.id.fab_menu);
-        fabMenu.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
+        final PopLayout popLayout = (PopLayout) findViewById(R.id.pop_Layout);
+        popLayout.setTips(0, "分享");
+        popLayout.setTips(1, "回答");
+        popLayout.setTips(2, "提问");
+
+        findViewById(R.id.item_1).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onMenuExpanded() {
+            public void onClick(View view) {
+                Log.i("JAYTEST", "item 1 clicked.");
+                startActivity(new Intent(MainActivity.this, TabActivity.class));
+                popLayout.close();
+            }
+        });
+
+        findViewById(R.id.item_2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("JAYTEST", "item 2 clicked.");
+                startActivity(new Intent(MainActivity.this, NavigationActivity.class));
+                popLayout.close();
+            }
+        });
+
+        findViewById(R.id.item_3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("JAYTEST", "item 3 clicked.");
+                popLayout.close();
+            }
+        });
+
+        popLayout.setOnExpandListener(new PopLayout.OnExpandListener() {
+            @Override
+            public void onExpand() {
                 if(!mMaskLayout.isStarted()) {
                     mMaskLayout.setVisibility(View.VISIBLE);
                     mMaskLayout.initAnim();
@@ -60,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onMenuCollapsed() {
+            public void onCollapse() {
                 mMaskLayout.hideMask();
             }
         });
@@ -69,48 +101,8 @@ public class MainActivity extends AppCompatActivity {
         mMaskLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fabMenu.collapse();
+                popLayout.close();
                 mMaskLayout.hideMask();
-            }
-        });
-
-        com.getbase.floatingactionbutton.FloatingActionButton button1 = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.action_a);
-        com.getbase.floatingactionbutton.FloatingActionButton button2 = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.action_b);
-        com.getbase.floatingactionbutton.FloatingActionButton button3 = (com.getbase.floatingactionbutton.FloatingActionButton) findViewById(R.id.action_c);
-
-        Drawable drawable1 = ContextCompat.getDrawable(this, R.mipmap.ic_share);
-        DrawableCompat.setTint(drawable1, ContextCompat.getColor(this, R.color.black_semi_transparent));
-
-        Drawable drawable2 = ContextCompat.getDrawable(this, R.mipmap.ic_answer);
-        DrawableCompat.setTint(drawable2, ContextCompat.getColor(this, R.color.black_semi_transparent));
-
-        Drawable drawable3 = ContextCompat.getDrawable(this, R.mipmap.ic_question);
-        DrawableCompat.setTint(drawable3, ContextCompat.getColor(this, R.color.black_semi_transparent));
-
-        button1.setIconDrawable(drawable1);
-        button2.setIconDrawable(drawable2);
-        button3.setIconDrawable(drawable3);
-
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, NavigationActivity.class));
-                fabMenu.collapse();
-            }
-        });
-
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, TabActivity.class));
-                fabMenu.collapse();
-            }
-        });
-
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO
             }
         });
 

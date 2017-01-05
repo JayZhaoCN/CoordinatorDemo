@@ -48,31 +48,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.jay.coordinatordemo.widgets.FloatingActionMenu
+    <com.jay.coordinatordemo.widgets.PopLayout
         app:layout_behavior=".MyBehavior"
-        android:id="@+id/my_floating_menu"
-        app:bottomDrawable="@mipmap/ic_fab_write"
+        app:animation_type="scale"
+        android:id="@+id/pop_Layout"
         android:layout_gravity="end|bottom"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <android.support.design.widget.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_answer" />
+        <com.jay.coordinatordemo.widgets.CircleShadowView
+            android:id="@+id/item_1"
+            app:icon="@mipmap/ic_share"
+            app:circle_color="@color/custom_blue"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            />
 
-        <android.support.design.widget.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_question" />
+        <com.jay.coordinatordemo.widgets.CircleShadowView
+            android:id="@+id/item_2"
+            app:icon="@mipmap/ic_answer"
+            app:circle_color="@color/custom_blue"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            />
 
-        <android.support.design.widget.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_share" />
+        <com.jay.coordinatordemo.widgets.CircleShadowView
+            android:id="@+id/item_3"
+            app:icon="@mipmap/ic_question"
+            app:circle_color="@color/custom_blue"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
 
-    </com.jay.coordinatordemo.widgets.FloatingActionMenu>
+        <com.jay.coordinatordemo.widgets.CrossBottomView
+            app:background_color="@color/custom_blue"
+            app:cross_color="@color/white"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+
+    </com.jay.coordinatordemo.widgets.PopLayout>
 
 </android.support.design.widget.CoordinatorLayout>

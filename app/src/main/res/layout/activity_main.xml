@@ -80,48 +80,46 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.getbase.floatingactionbutton.FloatingActionsMenu
+    <com.jay.coordinatordemo.widgets.PopLayout
         app:layout_behavior=".MyBehavior"
-        android:id="@+id/fab_menu"
+        app:animation_type="scale"
+        android:id="@+id/pop_Layout"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="60dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        fab:fab_addButtonColorNormal="@color/colorAccent"
-        fab:fab_addButtonColorPressed="@color/colorAccent"
-        fab:fab_addButtonPlusIconColor="@color/half_black"
-        fab:fab_labelStyle="@style/menu_labels_style"
-        android:layout_marginBottom="50dp"
-        android:layout_marginEnd="16dp"
-        fab:fab_icon="@mipmap/ic_fab_write">
+        android:layout_height="wrap_content">
 
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_a"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
-            fab:fab_title="分享"
-            fab:fab_size="mini"
-            fab:fab_colorPressed="@color/white_pressed"/>
+        <com.jay.coordinatordemo.widgets.CircleShadowView
+            android:id="@+id/item_1"
+            app:icon="@mipmap/ic_share"
+            app:circle_color="@color/custom_blue"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            />
 
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_b"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
-            fab:fab_title="回答"
-            fab:fab_size="normal"
-            fab:fab_colorPressed="@color/white_pressed"/>
+        <com.jay.coordinatordemo.widgets.CircleShadowView
+            android:id="@+id/item_2"
+            app:icon="@mipmap/ic_answer"
+            app:circle_color="@color/custom_blue"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            />
 
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_c"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
-            fab:fab_title="提问"
-            fab:fab_size="mini"
-            fab:fab_colorPressed="@color/white_pressed"/>
+        <com.jay.coordinatordemo.widgets.CircleShadowView
+            android:id="@+id/item_3"
+            app:icon="@mipmap/ic_question"
+            app:circle_color="@color/custom_blue"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
 
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+        <com.jay.coordinatordemo.widgets.CrossBottomView
+            app:background_color="@color/custom_blue"
+            app:cross_color="@color/white"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+
+    </com.jay.coordinatordemo.widgets.PopLayout>
 
     <LinearLayout
         android:elevation="5dp"

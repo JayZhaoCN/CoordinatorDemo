@@ -10,15 +10,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jay.coordinatordemo.widgets.FloatingActionMenu;
+import com.jay.coordinatordemo.widgets.PopLayout;
 
 public class TabActivity extends AppCompatActivity {
 
@@ -36,6 +39,7 @@ public class TabActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private MaskFrameLayout mMaskLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,37 +70,54 @@ public class TabActivity extends AppCompatActivity {
             if(tab != null) tab.setCustomView(adapter.getTabView(i));
         }
 
-        final FloatingActionMenu floatingActionMenu = (FloatingActionMenu) findViewById(R.id.my_floating_menu);
-        floatingActionMenu.setOnItemClickListener(new FloatingActionMenu.OnItemClickListener() {
+
+        final PopLayout popLayout = (PopLayout) findViewById(R.id.pop_Layout);
+        popLayout.setTips(0, "Android");
+        popLayout.setTips(1, "Java");
+        popLayout.setTips(2, "C++");
+
+        findViewById(R.id.item_1).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(int position) {
-                startActivity(new Intent(TabActivity.this, NavigationActivity.class));
-                //关闭（不带动画）
-                floatingActionMenu.collapse();
+            public void onClick(View view) {
+                Log.i("JAYTEST", "item 1 clicked.");
             }
         });
 
-        final MaskFrameLayout maskLayout = (MaskFrameLayout) findViewById(R.id.mask_layout);
-        maskLayout.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.item_2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("JAYTEST", "item 2 clicked.");
+            }
+        });
+
+        findViewById(R.id.item_3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("JAYTEST", "item 3 clicked.");
+            }
+        });
+
+        popLayout.setOnExpandListener(new PopLayout.OnExpandListener() {
+            @Override
+            public void onExpand() {
+                if(!mMaskLayout.isStarted()) {
+                    mMaskLayout.setVisibility(View.VISIBLE);
+                    mMaskLayout.initAnim();
+                }
+            }
+
+            @Override
+            public void onCollapse() {
+                mMaskLayout.hideMask();
+            }
+        });
+
+        mMaskLayout = (MaskFrameLayout) findViewById(R.id.mask_layout);
+        mMaskLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //关闭（带动画）
-                floatingActionMenu.collapseWithAnimation();
-            }
-        });
-
-        floatingActionMenu.setOnCollpaseListener(new FloatingActionMenu.OnCollapseListener() {
-            @Override
-            public void onCollapsing() {
-                maskLayout.hideMask();
-            }
-
-            @Override
-            public void onExpanding() {
-                if(!maskLayout.isStarted()) {
-                    maskLayout.setVisibility(View.VISIBLE);
-                    maskLayout.initAnim();
-                }
+                popLayout.close();
+                mMaskLayout.hideMask();
             }
         });
     }
