@@ -207,6 +207,9 @@ public class CrossBottomView extends View {
                 initRippleAnim();
                 break;
             case MotionEvent.ACTION_UP:
+                if(event.getX() > getWidth() || event.getX() < 0 || event.getY() > getHeight() || event.getY() < 0) {
+                    return true;
+                }
                 initAnim(!mIsCross);
                 break;
         }

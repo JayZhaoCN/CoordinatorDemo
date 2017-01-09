@@ -2,10 +2,10 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.jay.coordinatordemo.MainActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -94,24 +94,24 @@
             android:id="@+id/item_1"
             app:icon="@mipmap/ic_share"
             app:circle_color="@color/custom_blue"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             />
 
         <com.jay.coordinatordemo.widgets.CircleShadowView
             android:id="@+id/item_2"
             app:icon="@mipmap/ic_answer"
             app:circle_color="@color/custom_blue"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             />
 
         <com.jay.coordinatordemo.widgets.CircleShadowView
             android:id="@+id/item_3"
             app:icon="@mipmap/ic_question"
             app:circle_color="@color/custom_blue"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
 
         <com.jay.coordinatordemo.widgets.CrossBottomView
             app:background_color="@color/custom_blue"

@@ -22,11 +22,15 @@
             android:name=".NavigationActivity"
             android:label="@string/title_activity_navigation"
             android:parentActivityName="android.support.v7.app.AppCompatActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TabActivity"
             android:label="@string/title_activity_tab"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TestActivity"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

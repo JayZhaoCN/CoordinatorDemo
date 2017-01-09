@@ -43,7 +43,7 @@ public class PopLayout extends ViewGroup implements View.OnClickListener{
     public static final int STYLE_POP = 0;
     public static final int STYLE_SCALE = 1;
 
-    //default style is STYLE_POP
+    //default style is STYLE_SCALE
     private int mStyle = STYLE_SCALE;
 
     private SparseArray<String> mTips = new SparseArray<>();

@@ -1,7 +1,7 @@
 package com.jay.coordinatordemo;
 
-import android.content.Intent;
-import android.support.design.widget.TabLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -10,20 +10,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.jay.coordinatordemo.widgets.FloatingActionMenu;
-import com.jay.coordinatordemo.widgets.PopLayout;
-
-public class TabActivity extends AppCompatActivity {
+public class TestActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -39,14 +34,11 @@ public class TabActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    private MaskFrameLayout mMaskLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tab);
-
-        setTitle("Tab&ViewPagerDemo");
+        setContentView(R.layout.activity_test);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -54,113 +46,34 @@ public class TabActivity extends AppCompatActivity {
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        initViews();
-    }
-
-    private void initViews() {
-        ViewPager pager = (ViewPager) findViewById(R.id.container);
-        MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
-        pager.setAdapter(adapter);
-
-        TabLayout layout = (TabLayout) findViewById(R.id.tab_layout);
-        layout.setupWithViewPager(pager);
-
-        for(int i=0; i<3; i++) {
-            TabLayout.Tab tab = layout.getTabAt(i);
-            //tab.setText("");
-            //tab.setIcon();
-            if(tab != null) tab.setCustomView(adapter.getTabView(i));
-        }
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
 
 
-        final PopLayout popLayout = (PopLayout) findViewById(R.id.pop_Layout);
-        popLayout.setTips(0, "Android");
-        popLayout.setTips(1, "Java");
-        popLayout.setTips(2, "C++");
-
-        findViewById(R.id.item_1).setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("JAYTEST", "item 1 clicked.");
+                Snackbar snackbar = Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        });
+
+                snackbar.getView();
             }
         });
 
-        findViewById(R.id.item_2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("JAYTEST", "item 2 clicked.");
-            }
-        });
-
-        findViewById(R.id.item_3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("JAYTEST", "item 3 clicked.");
-            }
-        });
-
-        popLayout.setOnExpandListener(new PopLayout.OnExpandListener() {
-            @Override
-            public void onExpand() {
-                if(!mMaskLayout.isStarted()) {
-                    mMaskLayout.setVisibility(View.VISIBLE);
-                    mMaskLayout.initAnim();
-                }
-            }
-
-            @Override
-            public void onCollapse() {
-                mMaskLayout.hideMask();
-            }
-        });
-
-        mMaskLayout = (MaskFrameLayout) findViewById(R.id.mask_layout);
-        mMaskLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popLayout.close();
-                mMaskLayout.hideMask();
-            }
-        });
-    }
-
-    public class MyPagerAdapter extends FragmentPagerAdapter {
-
-        public MyPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return new MainActivity.MyFragment();
-        }
-
-        @Override
-        public int getCount() {
-            return 3;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return null;
-            //return "tab" + position;
-        }
-
-        public View getTabView(int position) {
-            View view = View.inflate(TabActivity.this, R.layout.layout_tab, null);
-            TextView titleTv = (TextView)view.findViewById(R.id.title);
-            titleTv.setText("Title " + ++position);
-            TextView tipsTv = (TextView) view.findViewById(R.id.tips);
-            tipsTv.setText("SubTitle " + position);
-            return view;
-        }
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_tab, menu);
+        getMenuInflater().inflate(R.menu.menu_test, menu);
         return true;
     }
 
@@ -207,19 +120,11 @@ public class TabActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_tab, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_test, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        //去除菜单按钮
-        menu.findItem(R.id.action_settings).setVisible(false);
-        invalidateOptionsMenu();
-        return super.onPrepareOptionsMenu(menu);
     }
 
     /**

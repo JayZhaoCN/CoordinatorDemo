@@ -62,24 +62,24 @@
             android:id="@+id/item_1"
             app:icon="@mipmap/ic_share"
             app:circle_color="@color/custom_blue"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             />
 
         <com.jay.coordinatordemo.widgets.CircleShadowView
             android:id="@+id/item_2"
             app:icon="@mipmap/ic_answer"
             app:circle_color="@color/custom_blue"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             />
 
         <com.jay.coordinatordemo.widgets.CircleShadowView
             android:id="@+id/item_3"
             app:icon="@mipmap/ic_question"
             app:circle_color="@color/custom_blue"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_width="45dp"
+            android:layout_height="45dp" />
 
         <com.jay.coordinatordemo.widgets.CrossBottomView
             app:background_color="@color/custom_blue"

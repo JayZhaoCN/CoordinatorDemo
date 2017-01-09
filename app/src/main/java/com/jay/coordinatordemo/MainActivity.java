@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("JAYTEST", "item 1 clicked.");
                 startActivity(new Intent(MainActivity.this, TabActivity.class));
                 popLayout.close();
+                mMaskLayout.hideMask();
             }
         });
 
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("JAYTEST", "item 2 clicked.");
                 startActivity(new Intent(MainActivity.this, NavigationActivity.class));
                 popLayout.close();
+                mMaskLayout.hideMask();
             }
         });
 
@@ -78,7 +80,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.i("JAYTEST", "item 3 clicked.");
+                startActivity(new Intent(MainActivity.this, TestActivity.class));
                 popLayout.close();
+                mMaskLayout.hideMask();
             }
         });
 
